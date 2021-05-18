@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Welcome from './webpages/welcome';
-import TodoNav from './components/navigation';
-import Registration from './components/registration';
+import TodoNav from './components/TodoNav';
+import Registration from './components/RegistrationCard';
 import {
   BrowserRouter as Router,
   Switch,

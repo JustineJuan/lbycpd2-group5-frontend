@@ -6,7 +6,7 @@ import {
 
 // webpages
 import Welcome from "./webpages/welcome";
-import Registration from "./components/registration";
+import RegistrationPage from "./webpages/registrationPage";
 
 //components
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +16,7 @@ function App() {
     <div>
       <Switch>
       <Route path="/register">
-          <Registration />
+          <RegistrationPage />
         </Route>
         <Route path="/">
           <Welcome />
