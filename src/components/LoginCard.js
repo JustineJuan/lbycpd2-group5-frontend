@@ -31,6 +31,7 @@ const LoginCard = () => {
         Authorization: `Bearer ${res.data.jwt}`,
       };
       setUserLogin(res.data.jwt);
+      localStorage.setItem("userId", res.data.userId);
       history.push("/home");
     });
   };

@@ -19,7 +19,7 @@ axios.defaults.baseURL = "http://localhost:8080";
 
 function App() {
   //axios.defaults.baseURL = "http://34.126.112.11:8080";
-  const [userLogin, setUserLogin] = useState("gab");
+  const [userLogin, setUserLogin] = useState(localStorage.getItem("userId"));
   const value = { userLogin, setUserLogin };
 
   return (

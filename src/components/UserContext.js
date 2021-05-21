@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserContext = React.createContext({
-  userLogin: "gab",
+  userLogin: localStorage.getItem("userId"),
   setUsersLogin: () => {},
 });
 
