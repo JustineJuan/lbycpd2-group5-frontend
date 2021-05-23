@@ -9,6 +9,8 @@ import RegistrationPage from "./webpages/registrationPage";
 import RegistrationLinkSent from "./webpages/registrationLinkSent";
 import LoginPage from "./webpages/loginPage";
 import Home from "./webpages/home";
+import Profile from "./webpages/profile";
+import LogoutRedirect from "./webpages/logoutRedirect";
 
 //components
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,6 +39,12 @@ function App() {
         </Route>
         <Route path="/home">
           <Home/>
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/logout">
+          <LogoutRedirect />
         </Route>
         <Route path="/">
           <Welcome />

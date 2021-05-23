@@ -1,13 +1,20 @@
-import { useContext } from "react";
-import UserContext from "./../components/UserContext"
+import {useEffect} from "react";
+import LoginNav from "./../components/LoginNav";
+import HomeContent from "./../components/HomeContent";
+import axios from "axios";
 
 const Home = () => {
-    const {userLogin, setuserLogin} = useContext(UserContext);
-    return(
-        <div>
-            <p>{userLogin}</p>
-        </div>
-    )
-}
+    
+    axios.defaults.headers.common = {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      };
+      
+  return (
+    <div>
+      <LoginNav />
+      <HomeContent />
+    </div>
+  );
+};
 
 export default Home;

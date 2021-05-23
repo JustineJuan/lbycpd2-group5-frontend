@@ -1,28 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Card, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import {useHistory} from "react-router-dom";
-import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 
-import UserContext from "./UserContext"
-
+import UserContext from "./UserContext";
+import AuthContext from "./AuthContext";
 
 const LoginCard = () => {
-    let history = useHistory();
-    const createUserObject = () => {
-        const userObject = {
-            username: usernameInput,
-            password: passwordInput
-        };
-        return userObject;
-    }
+  let history = useHistory();
+  const createUserObject = () => {
+    const userObject = {
+      username: usernameInput,
+      password: passwordInput,
+    };
+    return userObject;
+  };
   const [usernameInput, setUsername] = useState("");
   const [passwordInput, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [exists, setExists] = useState(true);
   const [incorrect, setIncorrect] = useState(false);
- const { userLogin, setUserLogin } = useContext(UserContext);
+  const { userLogin, setUserLogin } = useContext(UserContext);
+  const {authLogin, setAuthLogin} = useContext(AuthContext);
 
   const apiCalls = (e) => {
     e.preventDefault();
@@ -30,8 +29,10 @@ const LoginCard = () => {
       axios.defaults.headers.common = {
         Authorization: `Bearer ${res.data.jwt}`,
       };
-      setUserLogin(res.data.jwt);
+      setUserLogin(res.data.userId);
+      setAuthLogin(res.data.jwt);
       localStorage.setItem("userId", res.data.userId);
+      localStorage.setItem("jwt", res.data.jwt);
       history.push("/home");
     });
   };
