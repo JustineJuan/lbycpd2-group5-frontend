@@ -43,6 +43,8 @@ const HomeContent = () => {
             {tasks.map((item) => (
               <ParentTaskCard
                 key={item.parentId}
+                taskId={item.parentId}
+                user={item.userId}
                 title={item.title}
                 description={item.description}
                 dueDate={item.dueDate}

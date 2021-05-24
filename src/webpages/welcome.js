@@ -12,7 +12,7 @@ const Welcome = (props) => {
     <div>
       <TodoNav />
       <Container fluid>
-        <Row className="my-auto">
+        <Row className="p-5 m-4">
           <Col>
             <h1>TodoEXP</h1>
             <h2>Game-ify your productivity.</h2>
@@ -21,10 +21,22 @@ const Welcome = (props) => {
             </Col>
           </Col>
           <Col>
-            Being productive can be rather difficult from time to time. Let's
+            <p>Being productive can be rather difficult from time to time. Let's
             add some flair to that! TodoEXP is an open-source project for
             LBYCPD2 and SOFDESG under the supervision of Engr. Illahi and Engr.
-            Ligutan.
+            Ligutan.</p>
+            <p>
+              Here are the things that have been implemented: <br/>
+              [x] - User authentication and authorization with the back-end
+              [x] - JWT implementation
+              [x] - Adding of tasks. <br/>
+              [x] - Deleting of tasks. <br/>
+              [x] - Adding of child tasks. <br/>
+              [x] - Loading everything into the front-end through react <br/>
+              [x] - Dynamic loading of tasks in the front-end <br/>
+              [ ] - Experience points <br/>
+              [ ] - Profile page
+            </p>
           </Col>
         </Row>
       </Container>
