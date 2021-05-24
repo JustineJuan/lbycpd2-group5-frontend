@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import axiosConfig from './../axiosConfig'
+import axios from 'axios';
 
 const valid = (string1, string2) => {
   return string1 == string2;
@@ -24,7 +24,7 @@ const RegistrationCard = () => {
 
   const apiCalls = (e) => {
     e.preventDefault();
-    axiosConfig.post('/register', createUserObject()).then((res) => {console.log(res)}).catch((err) => {console.log(err)})
+    axios.post('/register', createUserObject()).then((res) => {console.log(res)}).catch((err) => {console.log(err)})
     history.push("/register/reqsent");
   };
 
