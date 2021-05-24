@@ -2,6 +2,7 @@ import {useContext, useState, useEffect} from 'react';
 import UserContext from './../components/UserContext';
 import LoginNav from "./../components/LoginNav";
 import axios from 'axios';
+import ProfileCard from '../components/ProfileCard';
 
 const Profile = () => {
     
@@ -14,11 +15,11 @@ const Profile = () => {
     const [loaded, setLoaded] = useState(false);
     
     useEffect(() => {
-        axios.get(`/users/${userLogin}`).then(res => console.log(res));
+        axios.get(`/users/${userLogin}`).then(res => {console.log(res.data); setCurrentUserData(res.data)});
         setLoaded(true);
     }, [])
 
-
+    let userData = currentUserData
 
     if(!loaded) {
         return (
@@ -31,7 +32,11 @@ const Profile = () => {
     return (
         <div>
             <LoginNav />
-            
+            <ProfileCard 
+            firstName={currentUserData.firstName} 
+            lastName = {currentUserData.lastName}
+            email = {currentUserData.email} />
+        
         </div>
     )
 }

@@ -15,7 +15,7 @@ import LogoutRedirect from "./webpages/logoutRedirect";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "./components/UserContext"
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "http://34.126.112.11:8080";
 document.body.style = 'background: white'
 function App() {
   //axios.defaults.baseURL = "http://34.126.112.11:8080";
