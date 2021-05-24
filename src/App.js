@@ -1,7 +1,6 @@
 import React, {useState, } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 // webpages
 import Welcome from "./webpages/welcome";
