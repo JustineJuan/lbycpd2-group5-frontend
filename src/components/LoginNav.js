@@ -7,15 +7,28 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const LoginNav = (props) => {
-
   const reload = () => {
     window.location.reload();
-  }
+  };
 
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+
+  const formatDate = (date) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
   const handleClose = () => {
     setShow(false);
@@ -32,20 +45,48 @@ const LoginNav = (props) => {
   const createTaskObject = () => {
     const userObject = {
       title: title,
-      description: desc
-    }
+      description: desc,
+    };
     return userObject;
+  };
+
+  const createTaskObjectWithDeadline = () => {
+    return {
+      title: title, 
+      description: desc,
+      dueDate: formatDate(startDate)
+    }
   }
-
-
 
   const apiCalls = (e) => {
     e.preventDefault();
-    axios.post(`/users/${localStorage.getItem("userId")}/addparent`, createTaskObject()).then((res) => {
-      reload();
-    })
-    console.log(`${title} and ${desc}`);
+    console.log("Calling API")
+    if(formatDate(startDate) == '1970-01-01'){
+      console.log("No date");
+      axios
+      .post(
+        `/users/${localStorage.getItem("userId")}/addparent`,
+        createTaskObject()
+      )
+      .then((res) => {
+        console.log(res);
+        reload();
+      });
+    } else {
+      console.log("With date");
+      axios
+      .post(
+        `/users/${localStorage.getItem("userId")}/addparent`,
+        createTaskObjectWithDeadline()
+      )
+      .then((res) => {
+        console.log(res)
+        reload();
+      });
+      console.log("Sent.")
+    }
 
+    console.log(`${title} and ${desc}`);
   };
 
   return (
@@ -84,9 +125,21 @@ const LoginNav = (props) => {
             </Form.Group>
             <Row>
               <Col>
-                <Button type="submit" onClick={handleClose}>Create Task</Button>
+                <p>Due date</p>
+                <DatePicker
+                  onChange={(date) => {
+                    console.log(formatDate(date))
+                    setStartDate(date)
+                  }}
+                  selected={startDate}
+                  isClearable
+                  placeholderText="No due date."
+                ></DatePicker>
               </Col>
             </Row>
+            <Button type="submit" onClick={handleClose} className="mt-3">
+                  Create Task
+                </Button>
           </Form>
         </Modal.Body>
       </Modal>
