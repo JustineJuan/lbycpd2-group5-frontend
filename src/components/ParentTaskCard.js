@@ -48,6 +48,9 @@ const ParentTaskCard = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCloseUpdate = () => setShow(false);
+  const handleShowUpdate = () => setShow(true);
+
   useEffect(() => {
     setLoaded(true);
   });
@@ -57,6 +60,10 @@ const ParentTaskCard = (props) => {
       .delete(`/users/${props.user}/${props.taskId}`)
       .then((res) => reload());
   };
+
+  const handleUpdate = () => {
+    axios.put(`/users/${props.user}/${props.taskId}`)
+  }
 
   const handleFinishTask = (e) => {
     e.preventDefault();
@@ -131,9 +138,45 @@ const ParentTaskCard = (props) => {
                 </Form>
               </Modal.Body>
             </Modal>
-            <Button className="mr-3" variant="info">
+            <Button className="mr-3" variant="info" onClick={handleShowUpdate}>
               Update task
             </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>Update Task</Modal.Header>
+              <Modal.Body>
+                <Form onSubmit={apiCalls}>
+                  <Form.Group controlId="formBasicTask">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      defaultValue={title}
+                      type="text"
+                      placeholder="Task title"
+                      onChange={(e) => {
+                        setTitle(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicTaskDesc">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                      defaultValue={desc}
+                      type="text"
+                      placeholder="Task description"
+                      onChange={(e) => {
+                        setDesc(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Row>
+                    <Col>
+                      <Button type="submit" onClick={handleClose}>
+                        Create Task
+                      </Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Modal.Body>
+            </Modal>
             <Button
               className="mr-3"
               disabled={finish}
@@ -149,7 +192,8 @@ const ParentTaskCard = (props) => {
                 <Card>
                   <Card.Body>
                     {props.description}
-                    <p>This was created on {props.createdDate}</p>
+                    <p>The due date of this task is: {(props.dueDate != null) 
+                    ? props.dueDate : "no due date set"}</p>
                     <p>Current status of task: {props.status.toString()}</p>
                   </Card.Body>
                 </Card>
