@@ -5,6 +5,7 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {Link} from "react-router-dom"
 
 const LoginNav = (props) => {
   const reload = () => {
@@ -46,6 +47,7 @@ const LoginNav = (props) => {
     const userObject = {
       title: title,
       description: desc,
+      experience: Math.floor(Math.random() * 200)
     };
     return userObject;
   };
@@ -54,7 +56,8 @@ const LoginNav = (props) => {
     return {
       title: title, 
       description: desc,
-      dueDate: formatDate(startDate)
+      dueDate: formatDate(startDate),
+      experience: Math.floor(Math.random() * 400),
     }
   }
 
@@ -91,9 +94,9 @@ const LoginNav = (props) => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="http://localhost:3000/home">TodoEXP</Navbar.Brand>
-      <Nav.Link href="http://localhost:3000/profile">Profile</Nav.Link>
-      <Nav.Link href="http://localhost:3000/logout">Logout</Nav.Link>
+      <Nav.Link><Link to="/home">Home</Link></Nav.Link>
+      <Nav.Link><Link to="/profile">Profile</Link></Nav.Link>
+      <Nav.Link><Link to="/logout">Logout</Link></Nav.Link>
       <Button className="ml-auto" onClick={handleShow}>
         Add new task
       </Button>

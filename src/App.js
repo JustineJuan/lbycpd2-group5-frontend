@@ -14,11 +14,10 @@ import LogoutRedirect from "./webpages/logoutRedirect";
 //components
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "./components/UserContext"
-
+// 34.126.112.11
 axios.defaults.baseURL = "http://34.126.112.11:8080";
 document.body.style = 'background: white'
 function App() {
-  //axios.defaults.baseURL = "http://34.126.112.11:8080";
   const [userLogin, setUserLogin] = useState(localStorage.getItem("userId"));
   const value = { userLogin, setUserLogin };
 

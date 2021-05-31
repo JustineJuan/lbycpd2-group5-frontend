@@ -1,23 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Welcome from './webpages/welcome';
-import TodoNav from './components/TodoNav';
-import Registration from './components/RegistrationCard';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import ReactDOMServer from "react-dom/server";
+
+import * as http from 'http'
+
+import { BrowserRouter, StaticRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <Router>
-      <App /> 
-  </Router>,
-  document.getElementById('root')
-
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

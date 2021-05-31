@@ -18,9 +18,7 @@ const Profile = () => {
         axios.get(`/users/${userLogin}`).then(res => {console.log(res.data); setCurrentUserData(res.data)});
         setLoaded(true);
     }, [])
-
-    let userData = currentUserData
-
+    console.log(currentUserData)
     if(!loaded) {
         return (
             <div>
@@ -35,7 +33,8 @@ const Profile = () => {
             <ProfileCard 
             firstName={currentUserData.firstName} 
             lastName = {currentUserData.lastName}
-            email = {currentUserData.email} />
+            email = {currentUserData.email} 
+            experience={currentUserData.experience}/>
         
         </div>
     )

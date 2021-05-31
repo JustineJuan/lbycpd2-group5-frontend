@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom"
 
 const TodoNav = (props) => {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="http://localhost:3000">TodoEXP</Navbar.Brand>
-      <Nav.Link href="http://localhost:3000/register">Register</Nav.Link>
-      <Nav.Link href="http://localhost:3000/login">Login</Nav.Link>
+      <Nav.Link><Link to="/">TodoEXP</Link></Nav.Link>
+      <Nav.Link><Link to="/register">Register</Link></Nav.Link>
+      <Nav.Link><Link to="/login">Login</Link></Nav.Link>
       <Nav.Link href="https://github.com/rafgabarceo/lbycpd2-group5">
         Github
       </Nav.Link>

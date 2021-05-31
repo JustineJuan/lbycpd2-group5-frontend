@@ -10,7 +10,8 @@ return (
     <Card.Body>
       <Card.Title>{props.firstName} {props.lastName}</Card.Title>
       <Card.Text>
-        My Email: {props.email}
+        My Email: {props.email} <br/>
+        Current Experience: {props.experience}
       </Card.Text>
     </Card.Body>
     
