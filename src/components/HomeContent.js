@@ -97,7 +97,7 @@ const HomeContent = () => {
                   <Button variant="secondary" onClick={finishAll}>
                     Mark all as done
                   </Button>
-                </ButtonGroup>{" "}
+                </ButtonGroup>
                 {tasks
                   .filter(function (person) {
                     return !person.status;
