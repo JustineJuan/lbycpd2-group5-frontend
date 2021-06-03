@@ -31,6 +31,8 @@ const HomeContent = () => {
     setLoaded(true);
   }, []);
 
+  // hello, world!
+
   const handleFilterChange = () => {
     setFilterFinish(!filterFinish);
   };
