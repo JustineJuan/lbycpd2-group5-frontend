@@ -39,7 +39,7 @@ const LoginCard = () => {
 
   return (
     <div>
-      <Card>
+      <Card className="bg-dark text-white">
         <Card.Title className="mx-auto mt-3">
           <h2>Login</h2>
         </Card.Title>

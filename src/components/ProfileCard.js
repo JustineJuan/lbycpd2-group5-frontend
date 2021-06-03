@@ -5,7 +5,7 @@ const ProfileCard = (props) => {
 return (
     
     <CardDeck>
-  <Card style={{ width: '5rem' }}>
+  <Card bg="dark" text ="white" style={{ width: '2rem' }}>
     <Card.Header> Profile </Card.Header>
     <Card.Body>
       <Card.Title>{props.firstName} {props.lastName}</Card.Title>
@@ -16,7 +16,7 @@ return (
     </Card.Body>
     
   </Card>
-  <Card style={{ width: '5rem' }}>
+  <Card bg="dark" text ="white" style={{ width: '2rem' }}>
   <Card.Header> Badges </Card.Header>
     <Card.Body>
       <Card.Title>Badges</Card.Title>

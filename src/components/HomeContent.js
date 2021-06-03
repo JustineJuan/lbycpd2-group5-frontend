@@ -31,8 +31,6 @@ const HomeContent = () => {
     setLoaded(true);
   }, []);
 
-  // hello, world!
-
   const handleFilterChange = () => {
     setFilterFinish(!filterFinish);
   };
@@ -89,8 +87,8 @@ const HomeContent = () => {
           <Card className="text-center style={width: 15rem}">
             <Card.Title className="mt-3">
               <h2>
-                Today is {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()} 
-                {/* +1 to month because Javascript starts counting months at 0 */}
+                Today is {date.getMonth() +1}/{date.getDate()}/{date.getFullYear()}
+                {/* + */}
               </h2>
             </Card.Title>
             <Row>
