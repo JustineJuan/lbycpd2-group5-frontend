@@ -8,6 +8,7 @@ import {
   Button,
   Modal,
   Form,
+  ButtonGroup,
 } from "react-bootstrap";
 import ChildTaskCard from "./ChildTaskCard";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,13 +20,13 @@ const ParentTaskCard = (props) => {
   };
 
   const [finish, setFinish] = useState(() => {
-    if(props.status){
+    if (props.status) {
       return true;
-    } 
-    return false; 
+    }
+    return false;
   });
 
-  console.log(props.status)
+  console.log(props.status);
   const [show, setShow] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [title, setTitle] = useState("");
@@ -100,15 +101,21 @@ const ParentTaskCard = (props) => {
 
   const handleFinishTask = (e) => {
     e.preventDefault();
-    axios.put(`/users/${props.user}/${props.taskId}/setStatus`).then((res) => {
-      setFinish(true);
-
-    }).then(res => {
-      axios.put(`/users/${props.user}/${props.taskId}/finish`, {experience: parseInt(props.experience)}).then((res) => {
+    axios
+      .put(`/users/${props.user}/${props.taskId}/setStatus`)
+      .then((res) => {
+        setFinish(true);
         reload();
-      });
-    })
+      })
   };
+
+  const handleClaim = (e) => {
+    e.preventDefault();
+    axios.put(`/users/${props.user}/${props.taskId}/finish`)
+    .then((res) => {
+      handleDelete();
+    })
+  }
 
   let childTasks = props.subtasks;
 
@@ -128,16 +135,6 @@ const ParentTaskCard = (props) => {
         <Card bg={finish ? "light" : "dark"}>
           <Card.Header className={!finish ? "text-secondary" : "text-dark"}>
             <h2>{props.title}</h2>
-            <Button
-              className="mr-3"
-              variant="light"
-              onClick={(e) => handleFinishTask(e)}
-            >
-              {!finish ? "Mark as done" : "Unmark as done"}
-            </Button>
-            <Button className="mr-3" onClick={handleShow}>
-              Add new child task
-            </Button>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>New Child Task</Modal.Header>
               <Modal.Body>
@@ -174,9 +171,6 @@ const ParentTaskCard = (props) => {
                 </Form>
               </Modal.Body>
             </Modal>
-            <Button className="mr-3" variant="info" onClick={handleShowUpdate}>
-              Update task
-            </Button>
             <Modal show={updateShow} onHide={handleCloseUpdate}>
               <Modal.Header closeButton>Update Task</Modal.Header>
               <Modal.Body>
@@ -205,7 +199,11 @@ const ParentTaskCard = (props) => {
                   </Form.Group>
                   <Form.Group controlId="formaUpdateTaskDesc">
                     <p>Update Date</p>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} isClearable></DatePicker>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      isClearable
+                    ></DatePicker>
                   </Form.Group>
                   <Row>
                     <Col>
@@ -217,13 +215,30 @@ const ParentTaskCard = (props) => {
                 </Form>
               </Modal.Body>
             </Modal>
+            <ButtonGroup>
             <Button
-              className="mt-3"
-              variant="danger"
-              onClick={handleDelete}
+              className="mr-3"
+              variant="light"
+              onClick={(e) => handleFinishTask(e)}
             >
-              Delete task
+              {!finish ? "Mark as done" : "Unmark as done"}
             </Button>
+            <Button
+              className="mr-3"
+              variant="info"
+              onClick={handleShowUpdate}
+              disabled={finish}
+            >
+              Update task
+            </Button>
+            <Button className="mr-3" onClick={handleShow} disabled={finish}>
+              Add new child task
+            </Button>
+            <Button className="mr-3" variant="danger" onClick={handleDelete}>
+              Dismiss task
+            </Button>
+            <Button onClick={handleClaim} disabled={!finish}>Claim task</Button>
+            </ButtonGroup>
           </Card.Header>
           <Card.Body className="p-5">
             <Row>
@@ -233,9 +248,12 @@ const ParentTaskCard = (props) => {
                     <i>{props.description}</i>
                     <p className="mt-2">
                       The due date of this task is:{" "}
-                      <b> {props.dueDate != null
-                        ? props.dueDate
-                        : "no due date set"}</b>
+                      <b>
+                        {" "}
+                        {props.dueDate != null
+                          ? props.dueDate
+                          : "no due date set"}
+                      </b>
                     </p>
                     <h1>{props.status}</h1>
                   </Card.Body>
